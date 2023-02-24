@@ -1,6 +1,6 @@
-<?xml version="1.0"  encoding="iso-8859-1"?>
+<?xml version="1.0"  encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:output method="xml" version="1.0"  encoding="iso-8859-1" indent="yes" doctype-system="Recettes.dtd"/>
+    <xsl:output method="xml" version="1.0"  encoding="utf-8" indent="yes" doctype-system="Recettes.dtd"/>
     <!-- // add the <!DOCTYPE Recettes SYSTEM "Recettes.dtd"> in the output -->
     <xsl:template match="/" >
         <Recettes>
@@ -14,7 +14,7 @@
 
             <!-- _______________________  begin apply Ingredients template _______________________ -->
             <Ingredients>
-                <xsl:for-each select="//objet[@type = 'ingrédient']">
+                <xsl:for-each select="//objet[@type = 'ingrÃ©dient']">
                     <xsl:apply-templates select="."/>
                 </xsl:for-each>
             </Ingredients>
@@ -30,7 +30,7 @@
 
             <!-- _______________________  begin apply Categorie template_______________________ -->
             <Categorie_plats>
-                <xsl:for-each select='//objet[@type = "catégorie"]'>
+                <xsl:for-each select='//objet[@type = "catÃ©gorie"]'>
                     <xsl:apply-templates select="."/>
                 </xsl:for-each>
             </Categorie_plats>
@@ -58,7 +58,7 @@
                 <xsl:value-of select="info[@nom='nom']/@value"/><!--pour selectioner le nom-->
             </Titre>
             <Resume>
-                <xsl:value-of select="info[@nom='résumé']/p/t/text()"/><!--pour selectioner le nom-->
+                <xsl:value-of select="info[@nom='rÃ©sumÃ©']/p/t/text()"/><!--pour selectioner le nom-->
             </Resume>
             <Photo>
                 <Url>
@@ -73,10 +73,10 @@
             </Date_publication>
 
             <Dificulte>
-                <xsl:value-of select="info[@nom='difficulté']/@value"/><!--pour selectioner le nom-->
+                <xsl:value-of select="info[@nom='difficultÃ©']/@value"/><!--pour selectioner le nom-->
             </Dificulte>
             <Recette_ingredients>
-                <xsl:for-each select="info[@nom='ingrédient']">
+                <xsl:for-each select="info[@nom='ingrÃ©dient']">
                     <Recette_ingredient >
                         <xsl:attribute name="Recette_ingredient_id">
                             <xsl:value-of select="@value"/>
@@ -88,7 +88,7 @@
                 <xsl:value-of select="info[@nom='nbre_personnes']/@value"/><!--pour selectioner le nom-->
             </Nombre_perssone>
             <Temp_preparation>
-                <xsl:value-of select="info[@nom='Préparation' and @value]/@value"/>
+                <xsl:value-of select="info[@nom='PrÃ©paration' and @value]/@value"/>
             </Temp_preparation>
             <Temp_cuisson>
                 <xsl:value-of select="info[@nom='Cuisson' and @value]/@value"/>
@@ -98,7 +98,7 @@
             </Temp_repos>
             <Description_preparation>
 
-                <xsl:copy-of select="info[@nom='Préparation' and not( ./@value)]/child::*"/>
+                <xsl:copy-of select="info[@nom='PrÃ©paration' and not( ./@value)]/child::*"/>
 
             </Description_preparation>
             <Note>
@@ -119,7 +119,7 @@
     <!-- _______________________ end of defining the recette template  _______________________  -->
 
     <!-- _______________________ begin of defining the Ingredient template  _______________________  -->
-    <xsl:template match="//objet[@type = 'ingrédient']">
+    <xsl:template match="//objet[@type = 'ingrÃ©dient']">
         <Ingredient>
             <xsl:attribute name="ingredient_id">
                 <xsl:value-of select="@id"/><!--pour selectioner l'id-->
@@ -129,7 +129,7 @@
                 <xsl:value-of select='info[@nom="nom"]/@value'/>
             </Ingredient_nom>
             <Apport_energetique>
-                <xsl:value-of select='info[@nom="Apport énergétique"]/@value'/>
+                <xsl:value-of select='info[@nom="Apport Ã©nergÃ©tique"]/@value'/>
             </Apport_energetique>
             <Saison>
                 <xsl:value-of select='info[@nom="saison"]/@value'/>
@@ -179,8 +179,8 @@
     </xsl:template>
     <!-- _______________________ end of defining the Auteur template  _______________________  -->
 
-    <!-- _______________________ begin of defining the catégorie template  _______________________  -->
-    <xsl:template match='//objet[@type = "catégorie"]'>
+    <!-- _______________________ begin of defining the catÃ©gorie template  _______________________  -->
+    <xsl:template match='//objet[@type = "catÃ©gorie"]'>
         <Categorie_plat>
             <xsl:attribute name="Categorie_plats_id">
                 <xsl:value-of select="@id"/>
@@ -194,7 +194,7 @@
             <!-- je doit recupere tout les soucategorie qui ont comme atribut info la categorie actuelle  -->
             <xsl:variable name="id_cat" select="@id"/>
             <xsl:for-each
-                    select='//objet[@type = "sous-catégorie" and info/@nom = "catégorie" and info/@value = $id_cat]'>
+                    select='//objet[@type = "sous-catÃ©gorie" and info/@nom = "catÃ©gorie" and info/@value = $id_cat]'>
                 <Sous_categorie_plat>
                     <xsl:attribute name="Categorie_plats_id">
                         <xsl:value-of select="@id"/>
@@ -209,7 +209,7 @@
                     <Sous_categorie_plat_recettes>
                         <xsl:variable name="sous_cat" select="@id"/>
                         <xsl:for-each
-                                select='//objet[@type = "recette" and info/@nom = "sous-catégorie" and info/@value = $sous_cat]'>
+                                select='//objet[@type = "recette" and info/@nom = "sous-catÃ©gorie" and info/@value = $sous_cat]'>
                             <Sous_categorie_plat_recette>
                                 <xsl:attribute name="Sous_categorie_plat_recette_id">
                                     <xsl:value-of select="@id"/>
@@ -221,7 +221,7 @@
             </xsl:for-each>
         </Categorie_plat>
     </xsl:template>
-    <!-- _______________________ end of defining the catégorie template  _______________________  -->
+    <!-- _______________________ end of defining the catÃ©gorie template  _______________________  -->
 
     <!-- _______________________ begin of defining the Produit template  _______________________  -->
     <xsl:template match="//objet[./@type = 'produit']">
@@ -233,7 +233,7 @@
                 <xsl:value-of select='info[@nom = "nom"]/@value'/>
             </Produit_Nom>
             <Produit_Ingredients>
-                <xsl:for-each select='info[@nom="ingrédient"]'>
+                <xsl:for-each select='info[@nom="ingrÃ©dient"]'>
                     <Produit_Ingredient>
                         <xsl:attribute name="Produit_Ingredient_id">
                             <xsl:value-of select="@value"/>
