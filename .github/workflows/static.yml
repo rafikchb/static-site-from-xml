@@ -42,3 +42,4 @@ jobs:
         uses: actions/deploy-pages@v1
         with: 
           publish_dir: ./html
+
