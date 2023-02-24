@@ -8,11 +8,11 @@
 
 ### Ce qui a été fait :
 
-- Création d'une DTD conforme à celle décrite dans le TP1, le résultat est le fichier Recettes.dtd.
-- Transformation du fichier donnees-recettes/donnees-recettes.dtd en un autre fichier xml qui respecte la DTD Recettes.dtd, le résultat est le fichier transformedDonneesRecetts.xml.
-- Transformation du fichier transformedDonneesRecetts.xml en un site web statique en utilisant le fichier siteMaker.xslt, Le résultat de cette transformation est le dossier src qui contiennent les pages html.
-- Ajout du dossier style qui contient les fichiers css, dans le dossier src.
-- Génération du schéma XSD correspondant au fichier transformé 'transformedDonneesRecetts.xml', ajout de plusieurs restrictions et vérification des identifiants (ID) et références d'identifiants (IDREF).
+- Création d'une DTD conforme à celle décrite dans le TP1. Le résultat est le fichier **Recettes.dtd**.
+- Transformation du fichier **donnees-recettes/donnees-recettes.xml** en un autre fichier XML qui respecte la DTD **Recettes.dtd**. Le résultat est le fichier **transformedDonneesRecettes.xml**.
+- Transformation du fichier **transformedDonneesRecettes.xml** en un site web statique en utilisant le fichier **siteMaker.xslt**. Le résultat de cette transformation est le dossier **html**, qui contient les pages HTML.
+- Ajout du dossier **style**, qui contient les fichiers CSS, dans le dossier **html**.
+- Génération du schéma XSD correspondant au fichier transformé **transformedDonneesRecettes.xml**. Ajout de plusieurs restrictions et vérification des identifiants (ID) et références d'identifiants (IDREF).
 
 ## Outils utilisés
 Éditeur de code : IntelliJ IDEA, utilisé pour exécuter les processus de transformation et de validation.
