@@ -1,0 +1,87 @@
+<!ELEMENT Recettes (Recette+, Ingredients+ , Auteurs , Categorie_plats , Produits)>
+        <!ELEMENT Recette (Titre ,Resume ,Photo , Date_publication , Dificulte , Recette_ingredients ,
+                Nombre_perssone ,Temp_preparation, Temp_cuisson , Temp_repos  ,Description_preparation ,
+                Note , Recette_auteurs )>
+        <!ATTLIST Recette recette_id ID #REQUIRED>
+        <!ELEMENT Titre (#PCDATA)>
+        <!ELEMENT Resume (#PCDATA)>
+        <!ELEMENT Photo (Url , Description)>
+        <!ELEMENT Url (#PCDATA)>
+        <!ELEMENT Description (#PCDATA)>
+        <!ELEMENT Date_publication (#PCDATA)>
+        <!ELEMENT Dificulte (#PCDATA)>
+        <!ELEMENT Recette_ingredients (Recette_ingredient+)>
+        <!ELEMENT Recette_ingredient EMPTY>
+        <!ATTLIST Recette_ingredient Recette_ingredient_id IDREF #REQUIRED>
+        <!ELEMENT Nombre_perssone (#PCDATA)>
+        <!ELEMENT Temp_preparation (#PCDATA)>
+        <!ELEMENT Temp_cuisson (#PCDATA)>
+        <!ELEMENT Temp_repos (#PCDATA)>
+
+
+        <!ELEMENT Description_preparation (#PCDATA |p | ul | table)* >
+        <!ELEMENT p (#PCDATA | b | i | a | br | strong | t |p)*>
+        <!ELEMENT b (#PCDATA)>
+        <!ELEMENT i (#PCDATA)>
+        <!ELEMENT a (#PCDATA)>
+        <!ATTLIST a href CDATA #REQUIRED>
+        <!ELEMENT br EMPTY>
+        <!ELEMENT strong (#PCDATA)>
+        <!ELEMENT t (#PCDATA)>
+
+        <!ELEMENT ul (li)*>
+        <!ELEMENT li (p)>
+        <!ELEMENT table (thead?, tfoot?, tbody+)>
+        <!ELEMENT thead (tr)>
+        <!ELEMENT tfoot (tr)>
+        <!ELEMENT tbody (tr+)>
+        <!ELEMENT tr (th|td)+>
+        <!ELEMENT th (#PCDATA)>
+        <!ELEMENT td (#PCDATA) >
+
+        <!ELEMENT Note (#PCDATA)>
+        <!ELEMENT Recette_auteurs (Recette_auteur+)>
+        <!ELEMENT Recette_auteur EMPTY>
+        <!ATTLIST Recette_auteur Recette_auteur_id IDREF #REQUIRED >
+        <!ELEMENT Ingredients (Ingredient )+ >
+        <!ELEMENT Ingredient (Ingredient_nom , Apport_energetique , Saison , Descriptif )>
+        <!ATTLIST Ingredient ingredient_id ID #REQUIRED>
+        <!ELEMENT Ingredient_nom (#PCDATA)>
+        <!ELEMENT Apport_energetique (#PCDATA)>
+        <!ELEMENT Saison (#PCDATA)>
+        <!ELEMENT Descriptif (#PCDATA | p | ul | table)*>
+        <!ELEMENT Auteurs (Auteur+)>
+
+        <!ELEMENT Auteur (Auteur_Nom,Auteur_Prenom, Age,Pays,Sexe,Bibliographie,Auteur_recettes)>
+        <!ATTLIST Auteur Auteur_id ID #REQUIRED>
+        <!ELEMENT Auteur_Nom (#PCDATA)>
+        <!ELEMENT Auteur_Prenom (#PCDATA)>
+        <!ELEMENT Age (#PCDATA)>
+        <!ELEMENT Pays (#PCDATA)>
+        <!ELEMENT Sexe (#PCDATA)>
+        <!ELEMENT Bibliographie (#PCDATA)>
+        <!ELEMENT Auteur_recettes (Auteur_recette*)>
+        <!ELEMENT Auteur_recette EMPTY>
+        <!ATTLIST Auteur_recette auteur_recette_id IDREF #REQUIRED >
+
+        <!ELEMENT Categorie_plats (Categorie_plat+)>
+
+        <!ELEMENT Categorie_plat (Categorie_plat_nom ,Categorie_plat_desription , Sous_categorie_plat* ) >
+       <!ATTLIST Categorie_plat Categorie_plats_id ID #REQUIRED>
+        <!ELEMENT Categorie_plat_nom (#PCDATA)>
+        <!ELEMENT Categorie_plat_desription (#PCDATA | p | ul | table)*>
+        <!ELEMENT Sous_categorie_plat (Sous_categorie_plat_nom,Sous_categorie_plat_description?,Sous_categorie_plat_recettes?)>
+        <!ATTLIST Sous_categorie_plat Categorie_plats_id ID #REQUIRED>
+        <!ELEMENT Sous_categorie_plat_nom (#PCDATA)>
+        <!ELEMENT Sous_categorie_plat_description (#PCDATA | p | ul | table)*>
+        <!ELEMENT Sous_categorie_plat_recettes (Sous_categorie_plat_recette*)>
+        <!ELEMENT Sous_categorie_plat_recette EMPTY>
+        <!ATTLIST Sous_categorie_plat_recette Sous_categorie_plat_recette_id IDREF #REQUIRED>
+
+        <!ELEMENT Produits (Produit)+>
+<!ATTLIST Produit produit_id ID #REQUIRED>
+        <!ELEMENT Produit (Produit_Nom ,Produit_Ingredients)>
+        <!ELEMENT Produit_Nom (#PCDATA)>
+        <!ELEMENT Produit_Ingredients (Produit_Ingredient+) >
+        <!ELEMENT Produit_Ingredient EMPTY>
+        <!ATTLIST Produit_Ingredient Produit_Ingredient_id IDREF #REQUIRED>

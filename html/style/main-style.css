@@ -1,0 +1,83 @@
+.container {
+    max-width:1000px ;
+    margin : auto;
+}
+
+body{
+
+    font-family: 'Roboto', sans-serif;
+}
+img{
+    width: 200px;
+}
+h1{
+    font-size: 2em;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+h2{
+    font-size: 1.5em;
+    font-weight: 400;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+h3{
+    font-size: 1.2em;
+    font-weight: 400;
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+/* style my ul that have a in their li*/
+
+ul{
+    padding-bottom: 10px;
+}
+ul li a{
+    text-decoration: none;
+
+    font-weight: 400;
+    font-size: 1em;
+    display: block;
+
+}
+li ul{
+    margin-left: 20px;
+}
+
+p{
+    line-height:1.1;
+}
+
+/* begin: barre de navigation   */
+/* fait a partire du tutorielle https://www.w3schools.com/howto/howto_js_topnav.asp*/
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: black;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+/* end: barre de navigation*/

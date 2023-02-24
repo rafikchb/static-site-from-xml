@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="Recettes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Recette"/>
+                <xs:element ref="Ingredients"/>
+                <xs:element ref="Auteurs"/>
+                <xs:element ref="Categorie_plats"/>
+                <xs:element ref="Produits"/>
+            </xs:sequence>
+        </xs:complexType>
+      <!--begin liaison des ref au keyref-->
+        <xs:keyref name="recetteRefVersAuteur" refer="key_auteur_id">
+            <xs:selector xpath="Recette/Recette_auteurs/Recette_auteur"/>
+            <xs:field xpath="@Recette_auteur_id"/>
+        </xs:keyref>
+        <xs:keyref name="recetteRefVersIngredient" refer="key_ingredient_id">
+            <xs:selector xpath="Recette/Recette_ingredients/Recette_ingredient"/>
+            <xs:field xpath="@Recette_ingredient_id"/>
+        </xs:keyref>
+
+        <xs:keyref name="auteurRefVersRecette" refer="key_recette_id">
+            <xs:selector xpath="Auteurs/Auteur/Auteur_recettes/Auteur_recette"/>
+            <xs:field xpath="@auteur_recette_id"/>
+        </xs:keyref>
+
+        <xs:keyref name="produitRefVersIngredient" refer="key_ingredient_id">
+            <xs:selector xpath="Produits/Produit/Produit_Ingredients/Produit_Ingredient"/>
+            <xs:field xpath="@Produit_Ingredient_id"/>
+        </xs:keyref>
+      <!--end liaison des ref au keyref-->
+
+
+        <xs:key name="key_recette_id">
+            <xs:selector xpath="Recette"></xs:selector>
+            <xs:field xpath="@recette_id"></xs:field>
+        </xs:key>
+    </xs:element>
+    <xs:element name="Recette">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Titre"/>
+                <xs:element ref="Resume"/>
+                <xs:element ref="Photo"/>
+                <xs:element ref="Date_publication"/>
+                <xs:element ref="Dificulte"/>
+                <xs:element ref="Recette_ingredients"/>
+                <xs:element ref="Nombre_perssone"/>
+                <xs:element ref="Temp_preparation"/>
+                <xs:element ref="Temp_cuisson"/>
+                <xs:element ref="Temp_repos"/>
+                <xs:element ref="Description_preparation"/>
+                <!--question 1.2-->
+                <xs:element ref="Note" minOccurs="0"/>
+                <xs:element ref="Recette_auteurs"/>
+            </xs:sequence>
+            <xs:attribute name="recette_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+
+
+    </xs:element>
+
+
+    <!-- question  1.3-->
+    <xs:element name="Titre">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:minLength value="2"/>
+                <xs:maxLength value="70"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="Resume" type="xs:string"/>
+    <xs:element name="Photo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Url"/>
+                <xs:element ref="Description"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Url" type="xs:anyURI"/>
+    <xs:element name="Description" type="xs:string"/>
+    <xs:element name="Date_publication" type="xs:NMTOKEN"/>
+    <xs:element name="Dificulte" type="xs:string"/>
+    <xs:element name="Recette_ingredients">
+        <xs:complexType>
+            <xs:sequence>
+                <!--question 1.2-->
+                <xs:element minOccurs="1" maxOccurs="20" ref="Recette_ingredient"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Recette_ingredient">
+        <xs:complexType>
+            <xs:attribute name="Recette_ingredient_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Nombre_perssone" type="xs:integer"/>
+    <xs:element name="Temp_preparation" type="xs:NMTOKEN"/>
+    <xs:element name="Temp_cuisson" type="xs:string"/>
+    <xs:element name="Temp_repos" type="xs:string"/>
+    <xs:element name="Description_preparation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="p"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Note" type="xs:string"/>
+    <xs:element name="Recette_auteurs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Recette_auteur"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Recette_auteur">
+        <xs:complexType>
+            <xs:attribute name="Recette_auteur_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Ingredients">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Ingredient" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+
+        <xs:key name="key_ingredient_id">
+            <xs:selector xpath="Ingredient"/>
+            <xs:field xpath="@ingredient_id"/>
+        </xs:key>
+
+    </xs:element>
+    <xs:element name="Ingredient">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Ingredient_nom"/>
+                <xs:element ref="Apport_energetique"/>
+                <xs:element ref="Saison"/>
+                <xs:element ref="Descriptif"/>
+            </xs:sequence>
+            <xs:attribute name="ingredient_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Ingredient_nom" type="xs:string"/>
+    <xs:element name="Apport_energetique" type="xs:string"/>
+    <xs:element name="Saison" type="xs:string"/>
+    <xs:element name="Descriptif">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" ref="p"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Auteurs">
+
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Auteur"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="key_auteur_id">
+            <xs:selector xpath="Auteur"></xs:selector>
+            <xs:field xpath="@Auteur_id"></xs:field>
+        </xs:key>
+    </xs:element>
+
+
+    <!--question 2-->
+
+    <xs:complexType name="Auteur">
+        <xs:sequence>
+            <xs:element ref="Auteur_Nom"/>
+            <xs:element ref="Auteur_Prenom"/>
+            <xs:element ref="Age"/>
+            <xs:element ref="Pays"/>
+            <xs:element ref="Sexe"/>
+            <xs:element ref="Bibliographie"/>
+            <xs:element ref="Auteur_recettes"/>
+        </xs:sequence>
+        <xs:attribute name="Auteur_id" use="required" type="xs:NCName"/>
+    </xs:complexType>
+    <xs:element name="Auteur" type="Auteur"/>
+
+    <xs:complexType name="Perssone">
+        <xs:complexContent>
+            <xs:extension base="Auteur">
+                <xs:sequence>
+                    <xs:element name="Titre" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:element name="Auteur_Nom" type="xs:string"/>
+    <xs:element name="Auteur_Prenom" type="xs:NCName"/>
+    <xs:element name="Age">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="Pays" type="xs:NCName"/>
+    <xs:element name="Sexe" type="xs:NCName"/>
+    <xs:element name="Bibliographie" type="xs:string"/>
+    <xs:element name="Auteur_recettes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Auteur_recette"/>
+            </xs:sequence>
+        </xs:complexType>
+
+
+    </xs:element>
+    <xs:element name="Auteur_recette">
+        <xs:complexType>
+            <xs:attribute name="auteur_recette_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+
+    </xs:element>
+    <xs:element name="Categorie_plats">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Categorie_plat"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:key name="key_categorie_plat_id">
+            <xs:selector xpath="Categorie_plat"></xs:selector>
+            <xs:field xpath="@Categorie_plats_id"></xs:field>
+        </xs:key>
+
+    </xs:element>
+    <xs:element name="Categorie_plat">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Categorie_plat_nom"/>
+                <xs:element ref="Categorie_plat_desription"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Sous_categorie_plat"/>
+            </xs:sequence>
+            <xs:attribute name="Categorie_plats_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Categorie_plat_nom" type="xs:string"/>
+    <xs:element name="Categorie_plat_desription">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="p"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sous_categorie_plat">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Sous_categorie_plat_nom"/>
+                <xs:element ref="Sous_categorie_plat_description"/>
+                <xs:element ref="Sous_categorie_plat_recettes"/>
+            </xs:sequence>
+            <xs:attribute name="Categorie_plats_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sous_categorie_plat_nom" type="xs:string"/>
+    <xs:element name="Sous_categorie_plat_description" type="xs:string"/>
+    <xs:element name="Sous_categorie_plat_recettes">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Sous_categorie_plat_recette"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Sous_categorie_plat_recette">
+        <xs:complexType>
+            <xs:attribute name="Sous_categorie_plat_recette_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Produits">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Produit"/>
+            </xs:sequence>
+        </xs:complexType>
+
+        <xs:key name="key_Produit_id">
+            <xs:selector xpath="Produit"></xs:selector>
+            <xs:field xpath="@produit_id"></xs:field>
+        </xs:key>
+
+    </xs:element>
+    <xs:element name="Produit">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Produit_Nom"/>
+                <xs:element ref="Produit_Ingredients"/>
+            </xs:sequence>
+            <xs:attribute name="produit_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Produit_Nom" type="xs:NCName"/>
+    <xs:element name="Produit_Ingredients">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" ref="Produit_Ingredient"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Produit_Ingredient">
+        <xs:complexType>
+            <xs:attribute name="Produit_Ingredient_id" use="required" type="xs:NCName"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="p">
+        <xs:complexType mixed="true">
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="p"/>
+                <xs:element ref="br"/>
+                <xs:element ref="strong"/>
+                <xs:element ref="t"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="br">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="strong" type="xs:string"/>
+    <xs:element name="t" type="xs:string"/>
+</xs:schema>
