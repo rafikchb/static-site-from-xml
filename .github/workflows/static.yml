@@ -41,4 +41,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1
         with: 
-          folder: html
+          folder: ./html
