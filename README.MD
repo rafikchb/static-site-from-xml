@@ -1,4 +1,3 @@
-[Cliquez ici pour la verssion live](https://rafikchb.github.io/static-site-from-xml/)
 # Rapport 
 ## Description du projet 
 ### But
@@ -18,4 +17,4 @@
 ## Outils utilisés
 Éditeur de code : IntelliJ IDEA, utilisé pour exécuter les processus de transformation et de validation.
 
-
+[Cliquez ici pour la verssion live](https://rafikchb.github.io/static-site-from-xml/)
